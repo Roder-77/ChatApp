@@ -1,0 +1,12 @@
+﻿DROP TABLE IF EXISTS default_menus;
+DROP TABLE IF EXISTS default_settings;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS classes;
+CREATE TABLE IF NOT EXISTS default_menus (menuId TEXT PRIMARY KEY,menuName TEXT NOT NULL,icon TEXT NOT NULL,gorder INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS menu_group(id TEXT NOT NULL UNIQUE, type TEXT NOT NULL, menuId TEXT NOT NULL, subMenus TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS default_settings (setting_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,value TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS users (memberid TEXT PRIMARY KEY,name TEXT NOT NULL,imageurl TEXT NOT NULL,localimageurl TEXT NULL);
+CREATE TABLE IF NOT EXISTS classes (subgroupid TEXT PRIMARY KEY,subgroupname TEXT NOT NULL,subgroupcode TEXT NOT NULL,teacherid TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS students (studentid TEXT PRIMARY KEY,subgroupid TEXT NOT NULL,teacherid TEXT NOT NULL,memberid TEXT NOT NULL,createdate TEXT NOT NULL);
+CREATE INDEX idx_menuId ON menu_group (menuId);
+CREATE INDEX classes_idx_teacherid ON classes (teacherid);
